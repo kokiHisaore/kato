@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A6904AFEA6A83CFA6B9A7FE9 /* Pods_kato.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5141173A5D437505FCFA0D48 /* Pods_kato.framework */; };
 		E7FD174921242A6300446460 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD174821242A6300446460 /* AppDelegate.swift */; };
 		E7FD174B21242A6300446460 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD174A21242A6300446460 /* ViewController.swift */; };
 		E7FD174E21242A6300446460 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7FD174C21242A6300446460 /* Main.storyboard */; };
@@ -15,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5141173A5D437505FCFA0D48 /* Pods_kato.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kato.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF3DD2B5397BBDCEBD0009A9 /* Pods-kato.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kato.release.xcconfig"; path = "Pods/Target Support Files/Pods-kato/Pods-kato.release.xcconfig"; sourceTree = "<group>"; };
+		E3611CDE8AC115360520FE1F /* Pods-kato.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kato.debug.xcconfig"; path = "Pods/Target Support Files/Pods-kato/Pods-kato.debug.xcconfig"; sourceTree = "<group>"; };
 		E7FD174521242A6300446460 /* kato.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kato.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7FD174821242A6300446460 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7FD174A21242A6300446460 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +33,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6904AFEA6A83CFA6B9A7FE9 /* Pods_kato.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C0B9B1778D643B2698D20DF9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E3611CDE8AC115360520FE1F /* Pods-kato.debug.xcconfig */,
+				CF3DD2B5397BBDCEBD0009A9 /* Pods-kato.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E7FD173C21242A6300446460 = {
 			isa = PBXGroup;
 			children = (
 				E7FD174721242A6300446460 /* kato */,
 				E7FD174621242A6300446460 /* Products */,
+				C0B9B1778D643B2698D20DF9 /* Pods */,
+				FD21B46B554CA35B1B9C5F59 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +80,14 @@
 			path = kato;
 			sourceTree = "<group>";
 		};
+		FD21B46B554CA35B1B9C5F59 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5141173A5D437505FCFA0D48 /* Pods_kato.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E7FD175721242A6500446460 /* Build configuration list for PBXNativeTarget "kato" */;
 			buildPhases = (
+				FA9E60832C29F1CC0EA75954 /* [CP] Check Pods Manifest.lock */,
 				E7FD174121242A6300446460 /* Sources */,
 				E7FD174221242A6300446460 /* Frameworks */,
 				E7FD174321242A6300446460 /* Resources */,
+				5CD0BC29A0458CEE270C2B26 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,6 +155,47 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5CD0BC29A0458CEE270C2B26 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-kato/Pods-kato-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-kato/Pods-kato-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA9E60832C29F1CC0EA75954 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-kato-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E7FD174121242A6300446460 /* Sources */ = {
@@ -278,6 +345,7 @@
 		};
 		E7FD175821242A6500446460 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3611CDE8AC115360520FE1F /* Pods-kato.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -296,6 +364,7 @@
 		};
 		E7FD175921242A6500446460 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF3DD2B5397BBDCEBD0009A9 /* Pods-kato.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
