@@ -8,5 +8,6 @@ target 'kato' do
   # Pods for kato
   pod 'Alamofire'
   pod 'Kanna'
+  pod 'MaterialComponents'
 
 end
