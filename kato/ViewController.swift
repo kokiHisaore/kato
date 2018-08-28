@@ -36,19 +36,86 @@
  */
 
 import UIKit
+import MaterialComponents
 
 class ViewController: UIViewController {
+    
+    let tabBar = MDCTabBar()
+    let appBarViewController = MDCAppBarViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        /* TabBarの設定 */
+        tabBar.bounds = view.bounds
+        tabBar.delegate = self
+        tabBar.items = [
+            UITabBarItem(title: "ゲーム", image: MDCIcons.imageFor_ic_check(), tag: 0),
+            UITabBarItem(title: "雑談", image: MDCIcons.imageFor_ic_info(), tag: 0),
+            UITabBarItem(title: "掲示板", image: MDCIcons.imageFor_ic_settings(), tag: 0),
+        ]
+        tabBar.itemAppearance = .titledImages
+        tabBar.barTintColor = MDCPalette.blue.tint300
+        tabBar.selectedItemTintColor = UIColor.white
+        tabBar.alignment = .justified
+        tabBar.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
+        tabBar.sizeToFit()
+        view.addSubview(tabBar)
+        
+        /* AppBarViewControllerの設定 */
+        self.addChildViewController(appBarViewController)
+        view.addSubview(appBarViewController.view)
+        appBarViewController.didMove(toParentViewController: self)
+        
+        /* NavigationBarの設定 */
+        appBarViewController.navigationBar.title = "kato"
+        appBarViewController.navigationBar.titleTextColor = UIColor.white
+        
+        /* HeaderViewの設定 */
+        appBarViewController.headerView.backgroundColor = MDCPalette.blue.tint500
+        appBarViewController.headerView.minMaxHeightIncludesSafeArea = false
+        appBarViewController.headerView.minimumHeight = 56 + 72
+        appBarViewController.headerView.tintColor = MDCPalette.blue.tint100
+        
+        /* HeaderStackViewの設定 */
+        appBarViewController.headerStackView.bottomBar = tabBar
+        appBarViewController.headerStackView.setNeedsLayout()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
-
+    
+    /* StatusBarをAppBarViewControllerに重ねる */
+    override var childViewControllerForStatusBarStyle: UIViewController? {
+        return appBarViewController
+    }
+    
+    /* TabBarの挙動を設定する */
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { (_) in
+            if let selectedItem = self.tabBar.selectedItem {
+                self.tabBar(self.tabBar, didSelect: selectedItem)
+            }
+        }, completion: nil)
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+    
+    
 }
 
+/* ViewControllerの拡張 */
+extension ViewController: MDCTabBarDelegate {
+    /* 画面遷移をする（実装方法は未定） */
+    /* TabBarItemが押された時に呼び出される */
+    func tabBar(_ tabBar: MDCTabBar, didSelect item: UITabBarItem) {
+        /*
+        guard let index = tabBar.items.index(of: item) else {
+            fatalError("MDCTabBarDelegate given selected item not found in tabBar.items")
+        }
+        
+        scrollView.setContentOffset(CGPoint(x: CGFloat(index) * view.bounds.width, y: 0),
+                                    animated: true)
+        */
+    }
+}
