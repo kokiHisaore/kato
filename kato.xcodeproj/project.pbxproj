@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2FD3B4EAF2D1EF43FA92FA7A /* Pods_kato.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C6226F52A0BD3D28DE1C01C /* Pods_kato.framework */; };
+		E7FB28192138A6C10006E8AB /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB28182138A6C10006E8AB /* WebViewController.swift */; };
 		E7FD174921242A6300446460 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD174821242A6300446460 /* AppDelegate.swift */; };
 		E7FD174B21242A6300446460 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD174A21242A6300446460 /* ViewController.swift */; };
 		E7FD174E21242A6300446460 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7FD174C21242A6300446460 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 		1CF2EF3430E7687F44C05E18 /* Pods-kato.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kato.release.xcconfig"; path = "Pods/Target Support Files/Pods-kato/Pods-kato.release.xcconfig"; sourceTree = "<group>"; };
 		5C6226F52A0BD3D28DE1C01C /* Pods_kato.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kato.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6412019103F73A204058248 /* Pods-kato.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kato.debug.xcconfig"; path = "Pods/Target Support Files/Pods-kato/Pods-kato.debug.xcconfig"; sourceTree = "<group>"; };
+		E7FB28182138A6C10006E8AB /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = ../../Practice/kato/sinpleWebView/sinpleWebView/WebViewController.swift; sourceTree = "<group>"; };
 		E7FD174521242A6300446460 /* kato.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kato.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7FD174821242A6300446460 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7FD174A21242A6300446460 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			children = (
 				E7FD174821242A6300446460 /* AppDelegate.swift */,
 				E7FD174A21242A6300446460 /* ViewController.swift */,
+				E7FB28182138A6C10006E8AB /* WebViewController.swift */,
 				E7FD174C21242A6300446460 /* Main.storyboard */,
 				E7FD174F21242A6500446460 /* Assets.xcassets */,
 				E7FD175121242A6500446460 /* LaunchScreen.storyboard */,
@@ -162,8 +165,6 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-kato/Pods-kato-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
@@ -176,8 +177,6 @@
 				"${BUILT_PRODUCTS_DIR}/MotionTransitioning/MotionTransitioning.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
@@ -198,15 +197,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-kato-checkManifestLockResult.txt",
 			);
@@ -223,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7FD174B21242A6300446460 /* ViewController.swift in Sources */,
+				E7FB28192138A6C10006E8AB /* WebViewController.swift in Sources */,
 				E7FD174921242A6300446460 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
