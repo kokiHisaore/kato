@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2FD3B4EAF2D1EF43FA92FA7A /* Pods_kato.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C6226F52A0BD3D28DE1C01C /* Pods_kato.framework */; };
+		70F302BB213CEA77002DC0F2 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F302BA213CEA77002DC0F2 /* GameViewController.swift */; };
+		70F302BD213CEA94002DC0F2 /* TalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F302BC213CEA94002DC0F2 /* TalkViewController.swift */; };
 		E7FB28192138A6C10006E8AB /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB28182138A6C10006E8AB /* WebViewController.swift */; };
 		E7FD174921242A6300446460 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD174821242A6300446460 /* AppDelegate.swift */; };
 		E7FD174B21242A6300446460 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD174A21242A6300446460 /* ViewController.swift */; };
@@ -19,8 +21,10 @@
 /* Begin PBXFileReference section */
 		1CF2EF3430E7687F44C05E18 /* Pods-kato.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kato.release.xcconfig"; path = "Pods/Target Support Files/Pods-kato/Pods-kato.release.xcconfig"; sourceTree = "<group>"; };
 		5C6226F52A0BD3D28DE1C01C /* Pods_kato.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kato.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		70F302BA213CEA77002DC0F2 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		70F302BC213CEA94002DC0F2 /* TalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkViewController.swift; sourceTree = "<group>"; };
 		C6412019103F73A204058248 /* Pods-kato.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kato.debug.xcconfig"; path = "Pods/Target Support Files/Pods-kato/Pods-kato.debug.xcconfig"; sourceTree = "<group>"; };
-		E7FB28182138A6C10006E8AB /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = ../../Practice/kato/sinpleWebView/sinpleWebView/WebViewController.swift; sourceTree = "<group>"; };
+		E7FB28182138A6C10006E8AB /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		E7FD174521242A6300446460 /* kato.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kato.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7FD174821242A6300446460 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7FD174A21242A6300446460 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 			children = (
 				E7FD174821242A6300446460 /* AppDelegate.swift */,
 				E7FD174A21242A6300446460 /* ViewController.swift */,
+				70F302BA213CEA77002DC0F2 /* GameViewController.swift */,
+				70F302BC213CEA94002DC0F2 /* TalkViewController.swift */,
 				E7FB28182138A6C10006E8AB /* WebViewController.swift */,
 				E7FD174C21242A6300446460 /* Main.storyboard */,
 				E7FD174F21242A6500446460 /* Assets.xcassets */,
@@ -217,9 +223,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70F302BB213CEA77002DC0F2 /* GameViewController.swift in Sources */,
 				E7FD174B21242A6300446460 /* ViewController.swift in Sources */,
 				E7FB28192138A6C10006E8AB /* WebViewController.swift in Sources */,
 				E7FD174921242A6300446460 /* AppDelegate.swift in Sources */,
+				70F302BD213CEA94002DC0F2 /* TalkViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

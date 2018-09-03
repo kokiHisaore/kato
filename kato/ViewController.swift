@@ -42,6 +42,7 @@ class ViewController: UIViewController {
     
     let tabBar = MDCTabBar()
     let appBarViewController = MDCAppBarViewController()
+    let scrollView = UIScrollView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +81,27 @@ class ViewController: UIViewController {
         /* HeaderStackViewの設定 */
         appBarViewController.headerStackView.bottomBar = tabBar
         appBarViewController.headerStackView.setNeedsLayout()
+        
+        scrollView.frame = CGRect(x: 0, y: tabBar.bounds.height+72, width: view.bounds.width*3, height: view.bounds.height)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.isPagingEnabled = true
+        scrollView.isScrollEnabled = true
+        view.addSubview(scrollView)
+        
+        let gamePage = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: scrollView.bounds.height))
+        gamePage.translatesAutoresizingMaskIntoConstraints = false
+        gamePage.backgroundColor = MDCPalette.lightBlue.tint300
+        scrollView.addSubview(gamePage)
+        
+        let talkPage = UIView(frame: CGRect(x: view.bounds.width, y: 0, width: view.bounds.width, height: scrollView.bounds.height))
+        talkPage.translatesAutoresizingMaskIntoConstraints = false
+        talkPage.backgroundColor = MDCPalette.lightBlue.tint200
+        scrollView.addSubview(talkPage)
+        
+        let webPage = UIView(frame: CGRect(x: view.bounds.width*2, y: 0, width: view.bounds.width, height: scrollView.bounds.height))
+        webPage.translatesAutoresizingMaskIntoConstraints = false
+        webPage.backgroundColor = MDCPalette.lightBlue.tint100
+        scrollView.addSubview(webPage)
     }
 
     override func didReceiveMemoryWarning() {
@@ -106,16 +128,14 @@ class ViewController: UIViewController {
 
 /* ViewControllerの拡張 */
 extension ViewController: MDCTabBarDelegate {
-    /* 画面遷移をする（実装方法は未定） */
+    /* 画面遷移をする */
     /* TabBarItemが押された時に呼び出される */
     func tabBar(_ tabBar: MDCTabBar, didSelect item: UITabBarItem) {
-        /*
         guard let index = tabBar.items.index(of: item) else {
             fatalError("MDCTabBarDelegate given selected item not found in tabBar.items")
         }
         
         scrollView.setContentOffset(CGPoint(x: CGFloat(index) * view.bounds.width, y: 0),
                                     animated: true)
-        */
     }
 }
