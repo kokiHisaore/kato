@@ -7,18 +7,46 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class GameViewController: UIViewController {
+    
+    let tableView = UITableView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tableView.frame = view.frame
+        view.addSubview(tableView)
+        
+        getVideoList()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getVideoList() {
+        let requestURL = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyCZiwV6cOuVuhxprSh1W6Y-lAugDa1LntE&q=youtube&part=snippet&maxResults=40&order=date"
+        Alamofire.request(requestURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response:DataResponse<Any>) in
+            switch(response.result) {
+            case .success(_):
+                if let jsonResult = response.result.value {
+                    let json = JSON(jsonResult)
+                    json["items"].forEach{(_, data) in
+                        let title = data["snippet"]["title"].string!
+                        print(title)
+                    }
+                }
+                break
+            case .failure(_):
+                print("error")
+                print(response.result.error ?? "Failed")
+                break
+            }
+        }
     }
     
 

@@ -7,7 +7,7 @@ target 'kato' do
 
   # Pods for kato
   pod 'Alamofire'
-  pod 'Kanna'
+  pod 'SwiftyJSON'
   pod 'MaterialComponents'
 
 end
