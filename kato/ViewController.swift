@@ -82,22 +82,26 @@ class ViewController: UIViewController {
         appBarViewController.headerStackView.bottomBar = tabBar
         appBarViewController.headerStackView.setNeedsLayout()
         
+        /* ScrollViewの設定 */
         scrollView.frame = CGRect(x: 0, y: tabBar.bounds.height+72, width: view.bounds.width*3, height: view.bounds.height)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.isPagingEnabled = true
         scrollView.isScrollEnabled = true
         view.addSubview(scrollView)
         
+        /* ゲームページの設定 */
         let gamePage = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: scrollView.bounds.height))
         gamePage.translatesAutoresizingMaskIntoConstraints = false
         gamePage.backgroundColor = MDCPalette.lightBlue.tint300
         scrollView.addSubview(gamePage)
         
+        /* 雑談ページの設定 */
         let talkPage = UIView(frame: CGRect(x: view.bounds.width, y: 0, width: view.bounds.width, height: scrollView.bounds.height))
         talkPage.translatesAutoresizingMaskIntoConstraints = false
         talkPage.backgroundColor = MDCPalette.lightBlue.tint200
         scrollView.addSubview(talkPage)
         
+        /* 掲示板ページの設定 */
         let webPage = UIView(frame: CGRect(x: view.bounds.width*2, y: 0, width: view.bounds.width, height: scrollView.bounds.height))
         webPage.translatesAutoresizingMaskIntoConstraints = false
         webPage.backgroundColor = MDCPalette.lightBlue.tint100
@@ -129,12 +133,14 @@ class ViewController: UIViewController {
 /* ViewControllerの拡張 */
 extension ViewController: MDCTabBarDelegate {
     /* 画面遷移をする */
-    /* TabBarItemが押された時に呼び出される */
+    /* タブが押された時に呼び出される */
     func tabBar(_ tabBar: MDCTabBar, didSelect item: UITabBarItem) {
+        /* 押されたタブのインデックス取得 */
         guard let index = tabBar.items.index(of: item) else {
             fatalError("MDCTabBarDelegate given selected item not found in tabBar.items")
         }
         
+        /* ScrollViewの位置を移動 */
         scrollView.setContentOffset(CGPoint(x: CGFloat(index) * view.bounds.width, y: 0),
                                     animated: true)
     }

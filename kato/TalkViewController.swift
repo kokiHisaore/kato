@@ -8,6 +8,7 @@
 
 import UIKit
 
+/* 雑談ページ */
 class TalkViewController: UIViewController {
 
     override func viewDidLoad() {
