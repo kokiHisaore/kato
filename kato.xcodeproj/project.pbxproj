@@ -13,7 +13,7 @@
 		70F302C3213D0648002DC0F2 /* Credential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F302C2213D0648002DC0F2 /* Credential.swift */; };
 		70F302CD213D5E59002DC0F2 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F302CB213D5E59002DC0F2 /* VideoCell.swift */; };
 		70F302CE213D5E59002DC0F2 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70F302CC213D5E59002DC0F2 /* VideoCell.xib */; };
-		E7FB28192138A6C10006E8AB /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB28182138A6C10006E8AB /* WebViewController.swift */; };
+		E75DEC20213ED23700FDA946 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75DEC1F213ED23700FDA946 /* WebViewController.swift */; };
 		E7FD174921242A6300446460 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD174821242A6300446460 /* AppDelegate.swift */; };
 		E7FD174B21242A6300446460 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD174A21242A6300446460 /* ViewController.swift */; };
 		E7FD174E21242A6300446460 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7FD174C21242A6300446460 /* Main.storyboard */; };
@@ -30,7 +30,7 @@
 		70F302CB213D5E59002DC0F2 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		70F302CC213D5E59002DC0F2 /* VideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		C6412019103F73A204058248 /* Pods-kato.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kato.debug.xcconfig"; path = "Pods/Target Support Files/Pods-kato/Pods-kato.debug.xcconfig"; sourceTree = "<group>"; };
-		E7FB28182138A6C10006E8AB /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		E75DEC1F213ED23700FDA946 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		E7FD174521242A6300446460 /* kato.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kato.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7FD174821242A6300446460 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7FD174A21242A6300446460 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -91,10 +91,10 @@
 			isa = PBXGroup;
 			children = (
 				E7FD174821242A6300446460 /* AppDelegate.swift */,
+				E75DEC1F213ED23700FDA946 /* WebViewController.swift */,
 				E7FD174A21242A6300446460 /* ViewController.swift */,
 				70F302BA213CEA77002DC0F2 /* GameViewController.swift */,
 				70F302BC213CEA94002DC0F2 /* TalkViewController.swift */,
-				E7FB28182138A6C10006E8AB /* WebViewController.swift */,
 				70F302C2213D0648002DC0F2 /* Credential.swift */,
 				E7FD174C21242A6300446460 /* Main.storyboard */,
 				E7FD174F21242A6500446460 /* Assets.xcassets */,
@@ -236,8 +236,8 @@
 				70F302BB213CEA77002DC0F2 /* GameViewController.swift in Sources */,
 				70F302CD213D5E59002DC0F2 /* VideoCell.swift in Sources */,
 				E7FD174B21242A6300446460 /* ViewController.swift in Sources */,
-				E7FB28192138A6C10006E8AB /* WebViewController.swift in Sources */,
 				E7FD174921242A6300446460 /* AppDelegate.swift in Sources */,
+				E75DEC20213ED23700FDA946 /* WebViewController.swift in Sources */,
 				70F302C3213D0648002DC0F2 /* Credential.swift in Sources */,
 				70F302BD213CEA94002DC0F2 /* TalkViewController.swift in Sources */,
 			);
