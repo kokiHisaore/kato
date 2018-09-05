@@ -141,7 +141,6 @@ extension ViewController: MDCTabBarDelegate {
         }
         
         /* ScrollViewの位置を移動 */
-        scrollView.setContentOffset(CGPoint(x: CGFloat(index) * view.bounds.width, y: 0),
-                                    animated: true)
+        scrollView.setContentOffset(CGPoint(x: CGFloat(index) * view.bounds.width, y: 0), animated: true)
     }
 }
