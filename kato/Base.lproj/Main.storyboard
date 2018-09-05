@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lrh-qH-ef5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JWG-g6-TSG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -53,6 +53,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NG5-35-e7T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1521" y="32"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="RJF-Jb-9uH">
+            <objects>
+                <viewController id="JWG-g6-TSG" customClass="WebViewController" customModule="kato" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pss-8I-Ps5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PAt-TF-Rpn">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="PAt-TF-Rpn" firstAttribute="top" secondItem="9IF-4q-kNh" secondAttribute="top" id="2gD-DD-SoC"/>
+                            <constraint firstItem="9IF-4q-kNh" firstAttribute="bottom" secondItem="PAt-TF-Rpn" secondAttribute="bottom" id="S3G-iE-n5V"/>
+                            <constraint firstItem="PAt-TF-Rpn" firstAttribute="leading" secondItem="9IF-4q-kNh" secondAttribute="leading" id="ZkS-qJ-3Lg"/>
+                            <constraint firstItem="9IF-4q-kNh" firstAttribute="trailing" secondItem="PAt-TF-Rpn" secondAttribute="trailing" id="h32-SZ-y6W"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9IF-4q-kNh"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="PAt-TF-Rpn" id="WaY-2F-blv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Hv-2F-895" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2142" y="83"/>
         </scene>
     </scenes>
 </document>
