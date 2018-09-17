@@ -1,43 +1,45 @@
 //
-//  WebViewController.swift
-//  kato
+//  ViewController.swift
+//  WKWebview
 //
-//  Created by Koki on 2018/09/04.
+//  Created by Koki on 2018/09/17.
 //  Copyright © 2018年 Koki. All rights reserved.
 //
 
 import UIKit
+import WebKit
 
-class WebViewController: UIViewController, UIWebViewDelegate {
+class WebViewController: UIViewController {
     
-    // WebViewのプロパティ
-    lazy var webView = setupWebView()
-    
-    // 初期URL
-    let initialUrl = URL(string: "http://com.nicovideo.jp/bbs/co2078137?com_header=1")
-    
-    // 最初の表示時に呼ばれるメソッド
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 初期URLで読み込み
-        let request = URLRequest(url: initialUrl!)
-        self.webView.loadRequest(request)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    func setupWebView() -> UIWebView {
-        let webView = UIWebView()
-        webView.delegate = self
-        webView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height-120)
+        let configuration = WKWebViewConfiguration()
+        let webView = WKWebView(frame: .zero, configuration: configuration)
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.navigationDelegate = self as! WKNavigationDelegate
         view.addSubview(webView)
         
-        return webView
+        [webView.topAnchor.constraint(equalTo: view.topAnchor),
+         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+         webView.leftAnchor.constraint(equalTo: view.leftAnchor),
+         webView.rightAnchor.constraint(equalTo: view.rightAnchor)].forEach  { anchor in
+            anchor.isActive = true
+        }
+        
+        if let url = URL(string: "http://www.google.com/") {
+            webView.load(URLRequest(url: url))
+        }
     }
     
+}
+
+extension ViewController: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("Finished navigating to url \(String(describing: webView.url))")
+    }
     
 }
+
 
