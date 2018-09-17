@@ -1,50 +1,44 @@
 //
-//  WebViewController.swift
-//  kato
+//  ViewController.swift
+//  WKWebview
 //
-//  Created by Koki on 2018/09/04.
+//  Created by Koki on 2018/09/17.
 //  Copyright © 2018年 Koki. All rights reserved.
 //
 
 import UIKit
+import WebKit
 
-class WebViewController: UIViewController, UIWebViewDelegate {
+class WebViewController: UIViewController {
     
-    // StoryBoadで配置したwebViewのプロパティ
-    @IBOutlet weak var webView: UIWebView!
-    
-    // 初期URL
-    let initialUrl = URL(string: "http://com.nicovideo.jp/bbs/co2078137?com_header=1")
-    
-    // 最初の表示時に呼ばれるメソッド
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // webViewのデリゲートを設定
-        self.webView.delegate = self
+        let configuration = WKWebViewConfiguration()
+        let webView = WKWebView(frame: .zero, configuration: configuration)
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.navigationDelegate = self as! WKNavigationDelegate
+        view.addSubview(webView)
         
-        // 初期URLで読み込み
-        let request = URLRequest(url: initialUrl!)
-        self.webView.loadRequest(request)
+        [webView.topAnchor.constraint(equalTo: view.topAnchor),
+         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+         webView.leftAnchor.constraint(equalTo: view.leftAnchor),
+         webView.rightAnchor.constraint(equalTo: view.rightAnchor)].forEach  { anchor in
+            anchor.isActive = true
+        }
         
-        // Do any additional setup after loading the view.
+        if let url = URL(string: "http://www.google.com/") {
+            webView.load(URLRequest(url: url))
+        }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+}
+
+extension ViewController: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("Finished navigating to url \(String(describing: webView.url))")
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
