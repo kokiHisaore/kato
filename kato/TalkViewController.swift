@@ -23,9 +23,14 @@ class TalkViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "VideoCell", bundle: nil), forCellReuseIdentifier: "VideoCell")
-        tableView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height-120)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
+        
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         /* VideoListを取得 */
         getVideoList()

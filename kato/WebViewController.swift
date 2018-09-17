@@ -21,9 +21,9 @@ class WebViewController: UIViewController {
         view.addSubview(webView)
         
         [webView.topAnchor.constraint(equalTo: view.topAnchor),
-         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-         webView.leftAnchor.constraint(equalTo: view.leftAnchor),
-         webView.rightAnchor.constraint(equalTo: view.rightAnchor)].forEach  { anchor in
+         webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+         webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)].forEach  { anchor in
             anchor.isActive = true
         }
         
