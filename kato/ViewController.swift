@@ -32,32 +32,95 @@
  youtubeのリアルタイムの検索結果（加藤純一 雑談, うんこちゃん 雑談等）を反映する
  **********掲示板**********
  これはサブコンテンツの為、内部ブラウザ(Safari)でWebPageが開ければ充分だと思う
- 
- */
+*/
 
 import UIKit
 import MaterialComponents
 
 class ViewController: UIViewController {
     
-    let tabBar = MDCTabBar()
-    let appBarViewController = MDCAppBarViewController()
-    lazy var scrollView: UIScrollView = setupScrollView()
+    // PROPERTY
     
-    fileprivate lazy var viewControllers: [UIViewController] = {
-        return self.prepareViewControllers()
+    lazy var appBarViewController = setupAppBar()
+    lazy var tabBar = setupTabBar()
+    lazy var scrollView = setupScrollView()
+    
+    /* 各ページのViewContoller */
+    lazy var viewControllers: [UIViewController] = {
+        return prepareViewControllers()
     }()
+    
+    /* StatusBarをAppBarViewControllerに重ねる */
+    override var childViewControllerForStatusBarStyle: UIViewController? {
+        return appBarViewController
+    }
 
+    
+    
+    // OVERRIDE
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
-        /* TabBarの設定 */
+        layoutScrollView()
+        layoutViewControllers()
+    }
+    
+    
+    
+    // PREPARE
+    
+    /* 各ページのViewControllerを準備する */
+    func prepareViewControllers() -> [UIViewController] {
+        let gameViewController = GameViewController()
+        let talkViewController = TalkViewController()
+        let webViewController = WebViewController()
+        
+        return [gameViewController, talkViewController, webViewController]
+    }
+    
+    
+    
+    // SETUP
+    
+    /* AppBarViewControllerの設定 */
+    func setupAppBar() -> MDCAppBarViewController {
+        let appBarViewController = MDCAppBarViewController()
+        self.addChildViewController(appBarViewController)
+        view.addSubview(appBarViewController.view)
+        appBarViewController.didMove(toParentViewController: self)
+        
+        appBarViewController.navigationBar.title = "KATO"
+        appBarViewController.navigationBar.titleFont = MDCTypography.display1Font()
+        appBarViewController.navigationBar.titleTextColor = UIColor.white
+        
+        appBarViewController.headerView.backgroundColor = MDCPalette.red.tint500
+        appBarViewController.headerView.minMaxHeightIncludesSafeArea = false
+        appBarViewController.headerView.minimumHeight = 100
+        
+        appBarViewController.headerStackView.bottomBar = tabBar
+        appBarViewController.headerStackView.setNeedsLayout()
+        
+        return appBarViewController
+    }
+    
+    /* TabBarの設定 */
+    func setupTabBar() -> MDCTabBar {
+        let tabBar = MDCTabBar()
         tabBar.bounds = view.bounds
         tabBar.delegate = self
         tabBar.items = [
-            UITabBarItem(title: "ゲーム", image: MDCIcons.imageFor_ic_check(), tag: 0),
-            UITabBarItem(title: "雑談", image: MDCIcons.imageFor_ic_info(), tag: 0),
-            UITabBarItem(title: "掲示板", image: MDCIcons.imageFor_ic_settings(), tag: 0),
+            UITabBarItem(title: "ゲーム", image: nil, tag: 0),
+            UITabBarItem(title: "雑談", image: nil, tag: 0),
+            UITabBarItem(title: "掲示板", image: nil, tag: 0),
         ]
         tabBar.itemAppearance = .titles
         tabBar.barTintColor = MDCPalette.red.tint500
@@ -68,56 +131,7 @@ class ViewController: UIViewController {
         tabBar.sizeToFit()
         view.addSubview(tabBar)
         
-        /* AppBarViewControllerの設定 */
-        self.addChildViewController(appBarViewController)
-        view.addSubview(appBarViewController.view)
-        appBarViewController.didMove(toParentViewController: self)
-        
-        /* NavigationBarの設定 */
-        appBarViewController.navigationBar.title = "kato"
-        appBarViewController.navigationBar.titleFont = MDCTypography.display1Font()
-        appBarViewController.navigationBar.titleTextColor = UIColor.white
-        
-        /* HeaderViewの設定 */
-        appBarViewController.headerView.backgroundColor = MDCPalette.red.tint500
-        appBarViewController.headerView.minMaxHeightIncludesSafeArea = false
-        appBarViewController.headerView.minimumHeight = 100
-        
-        /* HeaderStackViewの設定 */
-        appBarViewController.headerStackView.bottomBar = tabBar
-        appBarViewController.headerStackView.setNeedsLayout()
-        
-        scrollView.topAnchor.constraint(equalTo: appBarViewController.headerStackView.bottomAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    /* StatusBarをAppBarViewControllerに重ねる */
-    override var childViewControllerForStatusBarStyle: UIViewController? {
-        return appBarViewController
-    }
-    
-    /* TabBarの挙動を設定する */
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate(alongsideTransition: { (_) in
-            if let selectedItem = self.tabBar.selectedItem {
-                self.tabBar(self.tabBar, didSelect: selectedItem)
-            }
-        }, completion: nil)
-        super.viewWillTransition(to: size, with: coordinator)
-    }
-    
-    func prepareViewControllers() -> [UIViewController] {
-        let gameViewController = GameViewController()
-        let talkViewController = TalkViewController()
-        let webViewController = WebViewController()
-        
-        return [gameViewController, talkViewController, webViewController]
+        return tabBar
     }
     
     /* ScrollViewの設定 */
@@ -127,12 +141,37 @@ class ViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.isPagingEnabled = true
         scrollView.isScrollEnabled = true
+        view.addSubview(scrollView)
+        
+        return scrollView
+    }
+    
+    
+    
+    // LAYOUT
+    
+    /* ScrollViewのレイアウトを設定する */
+    func layoutScrollView() {
+        scrollView.topAnchor.constraint(equalTo: appBarViewController.headerStackView.bottomAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
         scrollView.contentSize = CGSize(
             width: UIScreen.main.bounds.width * CGFloat(viewControllers.count),
             height: view.frame.height
         )
-        view.addSubview(scrollView)
         
+        scrollView.setContentOffset(
+            CGPoint(
+                x: CGFloat(tabBar.items.index(of: tabBar.selectedItem!)!) * view.bounds.width,
+                y: 0
+            ), animated: true
+        )
+    }
+    
+    /* 各ページのViewControllerのレイアウトを設定する */
+    func layoutViewControllers() {
         for (index, viewController) in viewControllers.enumerated() {
             viewController.view.frame = CGRect(
                 x: UIScreen.main.bounds.width * CGFloat(index),
@@ -144,40 +183,47 @@ class ViewController: UIViewController {
             scrollView.addSubview(viewController.view)
             viewController.didMove(toParentViewController: self)
         }
-        
-        return scrollView
     }
     
     
 }
 
-/* ViewControllerの拡張 */
+/* TabBar用にViewControllerを拡張 */
 extension ViewController: MDCTabBarDelegate {
-    /* 画面遷移をする */
-    /* タブが押された時に呼び出される */
+    
+    /* タブが押された時に呼ばれる */
     func tabBar(_ tabBar: MDCTabBar, didSelect item: UITabBarItem) {
         /* 押されたタブのインデックス取得 */
         guard let index = tabBar.items.index(of: item) else {
             fatalError("MDCTabBarDelegate given selected item not found in tabBar.items")
         }
         
-        /* ScrollViewの位置を移動 */
-        scrollView.setContentOffset(CGPoint(x: CGFloat(index) * view.bounds.width, y: 0), animated: true)
+        /* ScrollViewの位置を移動してページを変える */
+        scrollView.setContentOffset(
+            CGPoint(
+                x: CGFloat(index) * view.bounds.width,
+                y: 0
+            ), animated: true
+        )
     }
+    
 }
 
+/* ScrollView用にViewControllerを拡張 */
 extension ViewController: UIScrollViewDelegate {
-    /*
+    
+    /* スクロールが終わった時に呼ばれる */
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentPage = floor(scrollView.contentOffset.x / scrollView.frame.width)
         tabBar.selectedItem = tabBar.items[Int(currentPage)]
     }
-    */
+    
+    /* スクロールを検知すると呼ばれる */
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: 0)
-        
-        let currentPage = floor(scrollView.contentOffset.x / scrollView.frame.width)
-        tabBar.selectedItem = tabBar.items[Int(currentPage)]
+        scrollView.contentSize = CGSize(
+            width: scrollView.contentSize.width,
+            height: 0
+        )
     }
     
 }

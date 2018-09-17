@@ -11,34 +11,38 @@ import Alamofire
 import SwiftyJSON
 
 /* ゲームページ */
-class GameViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class GameViewController: UIViewController, UITableViewDataSource {
     
-    let tableView = UITableView()
+    // PROPERTY
+    
+    lazy var tableView = setupTableView()
+    
+    /* 動画リスト */
     var videoList = JSON()
 
+    
+    
+    // OVERRIDE
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /* TableViewの設定 */
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UINib(nibName: "VideoCell", bundle: nil), forCellReuseIdentifier: "VideoCell")
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.tableFooterView = UIView()
-        view.addSubview(tableView)
-        
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-        /* VideoListを取得 */
         getVideoList()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        layoutTableView()
+    }
+    
+    
+    
+    // PREPARE
     
     /* YouTubeから動画情報を取得する */
     func getVideoList() {
@@ -48,7 +52,13 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         let requestURL = "https://www.googleapis.com/youtube/v3/search?key=\(Credential.apiKey)&q=\(searchWord)&part=snippet&order=date&maxResults=10"
         
         /* YouTubeにリクエストを送る */
-        Alamofire.request(requestURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response:DataResponse<Any>) in
+        Alamofire.request(
+            requestURL,
+            method: .get,
+            parameters: nil,
+            encoding: JSONEncoding.default,
+            headers: nil
+        ).responseJSON { (response:DataResponse<Any>) in
             /* レスポンスの結果によって分岐 */
             switch(response.result) {
             case .success(_):
@@ -73,6 +83,44 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    
+    
+    // SETUP
+    
+    /* TableViewの設定 */
+    func setupTableView() -> UITableView {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(
+            UINib(nibName: "VideoCell", bundle: nil),
+            forCellReuseIdentifier: "VideoCell"
+        )
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.tableFooterView = UIView()
+        view.addSubview(tableView)
+        
+        return tableView
+    }
+    
+    
+    
+    // LAYOUT
+    
+    /* TableViewのレイアウトを設定する */
+    func layoutTableView() {
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+
+
+}
+
+/* TableView用にGameViewControllerを拡張 */
+extension GameViewController: UITableViewDelegate {
+    
     /* TableViewのセクションの数を指定 */
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -86,12 +134,21 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
     /* TableViewのセルの内容を指定 */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         /* VideoCellを取り出す */
-        let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! VideoCell
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "VideoCell",
+            for: indexPath
+        ) as! VideoCell
         
         /* タイトルを設定 */
         cell.titleLabel.text = videoList[indexPath.row]["snippet"]["title"].string!
         /* サムネイルを設定 */
-        cell.thumbnailView.image = UIImage(data: try! Data(contentsOf: URL(string: videoList[indexPath.row]["snippet"]["thumbnails"]["default"]["url"].string!)!))
+        cell.thumbnailView.image = UIImage(
+            data: try! Data(
+                contentsOf: URL(
+                    string: videoList[indexPath.row]["snippet"]["thumbnails"]["default"]["url"].string!
+                )!
+            )
+        )
         
         return cell
     }
@@ -103,6 +160,5 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         /* セルの選択を解除 */
         tableView.deselectRow(at: indexPath, animated: false)
     }
-
-
+    
 }
