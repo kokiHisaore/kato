@@ -11,14 +11,10 @@ import WebKit
 
 class WebViewController: UIViewController {
     
+    lazy var webView = setupWebView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let configuration = WKWebViewConfiguration()
-        let webView = WKWebView(frame: .zero, configuration: configuration)
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.navigationDelegate = self
-        view.addSubview(webView)
         
         [webView.topAnchor.constraint(equalTo: view.topAnchor),
          webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -30,6 +26,16 @@ class WebViewController: UIViewController {
         if let url = URL(string: "http://www.google.com/") {
             webView.load(URLRequest(url: url))
         }
+    }
+    
+    func setupWebView() -> WKWebView {
+        let configuration = WKWebViewConfiguration()
+        let webView = WKWebView(frame: .zero, configuration: configuration)
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.navigationDelegate = self
+        view.addSubview(webView)
+        
+        return webView
     }
     
 }
