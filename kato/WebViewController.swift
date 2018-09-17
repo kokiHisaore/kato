@@ -17,7 +17,7 @@ class WebViewController: UIViewController {
         let configuration = WKWebViewConfiguration()
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.navigationDelegate = self as! WKNavigationDelegate
+        webView.navigationDelegate = self
         view.addSubview(webView)
         
         [webView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -34,7 +34,7 @@ class WebViewController: UIViewController {
     
 }
 
-extension ViewController: WKNavigationDelegate {
+extension WebViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("Finished navigating to url \(String(describing: webView.url))")
