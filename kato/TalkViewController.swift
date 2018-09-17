@@ -23,7 +23,7 @@ class TalkViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "VideoCell", bundle: nil), forCellReuseIdentifier: "VideoCell")
-        tableView.frame = view.frame
+        tableView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height-120)
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         
@@ -33,15 +33,14 @@ class TalkViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     /* YouTubeから動画情報を取得する */
     func getVideoList() {
         /* 検索ワード */
-        let searchWord = "youtube"
+        let searchWord = "talk"
         /* リクエストURL */
-        let requestURL = "https://www.googleapis.com/youtube/v3/search?key=\(Credential.apiKey)&q=\(searchWord)&part=snippet&order=date"
+        let requestURL = "https://www.googleapis.com/youtube/v3/search?key=\(Credential.apiKey)&q=\(searchWord)&part=snippet&order=date&maxResults=10"
         
         /* YouTubeにリクエストを送る */
         Alamofire.request(requestURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response:DataResponse<Any>) in
@@ -100,15 +99,5 @@ class TalkViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

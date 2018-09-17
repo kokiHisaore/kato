@@ -10,8 +10,8 @@ import UIKit
 
 class WebViewController: UIViewController, UIWebViewDelegate {
     
-    // StoryBoadで配置したwebViewのプロパティ
-    @IBOutlet weak var webView: UIWebView!
+    // WebViewのプロパティ
+    lazy var webView = setupWebView()
     
     // 初期URL
     let initialUrl = URL(string: "http://com.nicovideo.jp/bbs/co2078137?com_header=1")
@@ -20,31 +20,24 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // webViewのデリゲートを設定
-        self.webView.delegate = self
-        
         // 初期URLで読み込み
         let request = URLRequest(url: initialUrl!)
         self.webView.loadRequest(request)
-        
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    func setupWebView() -> UIWebView {
+        let webView = UIWebView()
+        webView.delegate = self
+        webView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height-120)
+        view.addSubview(webView)
+        
+        return webView
+    }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 

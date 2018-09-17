@@ -42,7 +42,11 @@ class ViewController: UIViewController {
     
     let tabBar = MDCTabBar()
     let appBarViewController = MDCAppBarViewController()
-    let scrollView = UIScrollView()
+    lazy var scrollView: UIScrollView = setupScrollView()
+    
+    fileprivate lazy var viewControllers: [UIViewController] = {
+        return self.prepareViewControllers()
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +59,9 @@ class ViewController: UIViewController {
             UITabBarItem(title: "雑談", image: MDCIcons.imageFor_ic_info(), tag: 0),
             UITabBarItem(title: "掲示板", image: MDCIcons.imageFor_ic_settings(), tag: 0),
         ]
-        tabBar.itemAppearance = .titledImages
-        tabBar.barTintColor = MDCPalette.blue.tint300
+        tabBar.itemAppearance = .titles
+        tabBar.barTintColor = MDCPalette.red.tint500
+        tabBar.tintColor = UIColor.white
         tabBar.selectedItemTintColor = UIColor.white
         tabBar.alignment = .justified
         tabBar.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
@@ -70,42 +75,22 @@ class ViewController: UIViewController {
         
         /* NavigationBarの設定 */
         appBarViewController.navigationBar.title = "kato"
+        appBarViewController.navigationBar.titleFont = MDCTypography.display1Font()
         appBarViewController.navigationBar.titleTextColor = UIColor.white
         
         /* HeaderViewの設定 */
-        appBarViewController.headerView.backgroundColor = MDCPalette.blue.tint500
+        appBarViewController.headerView.backgroundColor = MDCPalette.red.tint500
         appBarViewController.headerView.minMaxHeightIncludesSafeArea = false
-        appBarViewController.headerView.minimumHeight = 56 + 72
-        appBarViewController.headerView.tintColor = MDCPalette.blue.tint100
+        appBarViewController.headerView.minimumHeight = 100
         
         /* HeaderStackViewの設定 */
         appBarViewController.headerStackView.bottomBar = tabBar
         appBarViewController.headerStackView.setNeedsLayout()
         
-        /* ScrollViewの設定 */
-        scrollView.frame = CGRect(x: 0, y: tabBar.bounds.height+72, width: view.bounds.width*3, height: view.bounds.height)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.isPagingEnabled = true
-        scrollView.isScrollEnabled = true
-        view.addSubview(scrollView)
-        
-        /* ゲームページの設定 */
-        let gamePage = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: scrollView.bounds.height))
-        gamePage.translatesAutoresizingMaskIntoConstraints = false
-        gamePage.backgroundColor = MDCPalette.lightBlue.tint300
-        scrollView.addSubview(gamePage)
-        
-        /* 雑談ページの設定 */
-        let talkPage = UIView(frame: CGRect(x: view.bounds.width, y: 0, width: view.bounds.width, height: scrollView.bounds.height))
-        talkPage.translatesAutoresizingMaskIntoConstraints = false
-        talkPage.backgroundColor = MDCPalette.lightBlue.tint200
-        scrollView.addSubview(talkPage)
-        
-        /* 掲示板ページの設定 */
-        let webPage = UIView(frame: CGRect(x: view.bounds.width*2, y: 0, width: view.bounds.width, height: scrollView.bounds.height))
-        webPage.translatesAutoresizingMaskIntoConstraints = false
-        webPage.backgroundColor = MDCPalette.lightBlue.tint100
-        scrollView.addSubview(webPage)
+        scrollView.topAnchor.constraint(equalTo: appBarViewController.headerStackView.bottomAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -127,6 +112,42 @@ class ViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
     }
     
+    func prepareViewControllers() -> [UIViewController] {
+        let gameViewController = GameViewController()
+        let talkViewController = TalkViewController()
+        let webViewController = WebViewController()
+        
+        return [gameViewController, talkViewController, webViewController]
+    }
+    
+    /* ScrollViewの設定 */
+    func setupScrollView() -> UIScrollView {
+        let scrollView = UIScrollView()
+        scrollView.delegate = self
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.isPagingEnabled = true
+        scrollView.isScrollEnabled = true
+        scrollView.contentSize = CGSize(
+            width: UIScreen.main.bounds.width * CGFloat(viewControllers.count),
+            height: view.frame.height
+        )
+        view.addSubview(scrollView)
+        
+        for (index, viewController) in viewControllers.enumerated() {
+            viewController.view.frame = CGRect(
+                x: UIScreen.main.bounds.width * CGFloat(index),
+                y: 0,
+                width: scrollView.frame.width,
+                height: scrollView.frame.height
+            )
+            addChildViewController(viewController)
+            scrollView.addSubview(viewController.view)
+            viewController.didMove(toParentViewController: self)
+        }
+        
+        return scrollView
+    }
+    
     
 }
 
@@ -143,4 +164,20 @@ extension ViewController: MDCTabBarDelegate {
         /* ScrollViewの位置を移動 */
         scrollView.setContentOffset(CGPoint(x: CGFloat(index) * view.bounds.width, y: 0), animated: true)
     }
+}
+
+extension ViewController: UIScrollViewDelegate {
+    /*
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let currentPage = floor(scrollView.contentOffset.x / scrollView.frame.width)
+        tabBar.selectedItem = tabBar.items[Int(currentPage)]
+    }
+    */
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: 0)
+        
+        let currentPage = floor(scrollView.contentOffset.x / scrollView.frame.width)
+        tabBar.selectedItem = tabBar.items[Int(currentPage)]
+    }
+    
 }
