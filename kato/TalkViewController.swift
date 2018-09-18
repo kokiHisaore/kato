@@ -11,11 +11,12 @@ import Alamofire
 import SwiftyJSON
 
 /* 雑談ページ */
-class TalkViewController: UIViewController, UITableViewDataSource {
+class TalkViewController: UIViewController {
     
     // PROPERTY
     
     lazy var tableView = setupTableView()
+    lazy var refreshControl = setupRefreshControl()
     
     /* 動画リスト */
     var videoList = JSON()
@@ -42,6 +43,15 @@ class TalkViewController: UIViewController, UITableViewDataSource {
     
     
     
+    // OBJC
+    
+    /* TableViewが引っ張られた時に呼ばれる */
+    @objc func refresh(sender: UIRefreshControl) {
+        getVideoList()
+    }
+    
+    
+    
     // PREPARE
     
     /* YouTubeから動画情報を取得する */
@@ -51,35 +61,46 @@ class TalkViewController: UIViewController, UITableViewDataSource {
         /* リクエストURL */
         let requestURL = "https://www.googleapis.com/youtube/v3/search?key=\(Credential.apiKey)&q=\(searchWord)&part=snippet&order=date&maxResults=10"
         
-        /* YouTubeにリクエストを送る */
-        Alamofire.request(
-            requestURL,
-            method: .get,
-            parameters: nil,
-            encoding: JSONEncoding.default,
-            headers: nil
-            ).responseJSON { (response:DataResponse<Any>) in
-                /* レスポンスの結果によって分岐 */
-                switch(response.result) {
-                case .success(_):
-                    /* 成功の場合 */
-                    if let jsonResult = response.result.value {
-                        /* 結果をJSONで取得 */
-                        let json = JSON(jsonResult)
-                        
-                        /* 動画リストを取得 */
-                        self.videoList = json["items"]
+        /* 重い処理のためサブスレッドで実行 */
+        DispatchQueue.global().async {
+            /* YouTubeにリクエストを送る */
+            Alamofire.request(
+                requestURL,
+                method: .get,
+                parameters: nil,
+                encoding: JSONEncoding.default,
+                headers: nil
+                ).responseJSON { (response:DataResponse<Any>) in
+                    /* レスポンスの結果によって分岐 */
+                    switch(response.result) {
+                    case .success(_):
+                        /* 成功の場合 */
+                        if let jsonResult = response.result.value {
+                            /* 結果をJSONで取得 */
+                            let json = JSON(jsonResult)
+                            
+                            /* 動画リストを取得 */
+                            self.videoList = json["items"]
+                        }
+                        break
+                    case .failure(_):
+                        /* 失敗の場合 */
+                        print("error")
+                        print(response.result.error ?? "Failed")
+                        break
+                    }
+                    
+                    /* UIに関する処理はメインスレッドで実行 */
+                    DispatchQueue.main.async {
+                        /* RefreshControlが回っていたら止める */
+                        if self.refreshControl.isRefreshing {
+                            self.refreshControl.endRefreshing()
+                        }
                         
                         /* TableViewを更新 */
                         self.tableView.reloadData()
                     }
-                    break
-                case .failure(_):
-                    /* 失敗の場合 */
-                    print("error")
-                    print(response.result.error ?? "Failed")
-                    break
-                }
+            }
         }
     }
     
@@ -97,10 +118,19 @@ class TalkViewController: UIViewController, UITableViewDataSource {
             forCellReuseIdentifier: "VideoCell"
         )
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.refreshControl = refreshControl
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         
         return tableView
+    }
+    
+    /* RefreshControlの設定 */
+    func setupRefreshControl() -> UIRefreshControl {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        
+        return refreshControl
     }
     
     
@@ -119,7 +149,7 @@ class TalkViewController: UIViewController, UITableViewDataSource {
 }
 
 /* TableView用にTalkViewControllerを拡張 */
-extension TalkViewController: UITableViewDelegate {
+extension TalkViewController: UITableViewDelegate, UITableViewDataSource {
     
     /* TableViewのセクションの数を指定 */
     func numberOfSections(in tableView: UITableView) -> Int {
