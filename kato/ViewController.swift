@@ -51,7 +51,7 @@ class ViewController: UIViewController {
     }()
     
     /* StatusBarをAppBarViewControllerに重ねる */
-    override var childViewControllerForStatusBarStyle: UIViewController? {
+    override var childForStatusBarStyle: UIViewController? {
         return appBarViewController
     }
 
@@ -94,9 +94,9 @@ class ViewController: UIViewController {
     /* AppBarViewControllerの設定 */
     func setupAppBar() -> MDCAppBarViewController {
         let appBarViewController = MDCAppBarViewController()
-        self.addChildViewController(appBarViewController)
+        self.addChild(appBarViewController)
         view.addSubview(appBarViewController.view)
-        appBarViewController.didMove(toParentViewController: self)
+        appBarViewController.didMove(toParent: self)
         
         appBarViewController.navigationBar.title = "KATO"
         appBarViewController.navigationBar.titleFont = MDCTypography.display1Font()
@@ -179,9 +179,9 @@ class ViewController: UIViewController {
                 width: scrollView.frame.width,
                 height: scrollView.frame.height
             )
-            addChildViewController(viewController)
+            addChild(viewController)
             scrollView.addSubview(viewController.view)
-            viewController.didMove(toParentViewController: self)
+            viewController.didMove(toParent: self)
         }
     }
     

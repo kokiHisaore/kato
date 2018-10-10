@@ -9,5 +9,6 @@ target 'kato' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'MaterialComponents'
+  pod 'XLPagerTabStrip', :git => 'https://github.com/xmartlabs/XLPagerTabStrip', :branch => 'master'
 
 end
