@@ -15,6 +15,7 @@
 		70F302D2213FA353002DC0F2 /* RootTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F302D1213FA353002DC0F2 /* RootTabViewController.swift */; };
 		70F302D4213FA71F002DC0F2 /* OneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F302D3213FA71F002DC0F2 /* OneViewController.swift */; };
 		70F302D6213FA737002DC0F2 /* TwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F302D5213FA737002DC0F2 /* TwoViewController.swift */; };
+		800B3EFD216F58CC00408951 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800B3EFC216F58CC00408951 /* VideoViewController.swift */; };
 		E75DEC20213ED23700FDA946 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75DEC1F213ED23700FDA946 /* WebViewController.swift */; };
 		E75DEC22213EED6400FDA946 /* Credential.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75DEC21213EED6400FDA946 /* Credential.swift */; };
 		E7FD174921242A6300446460 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD174821242A6300446460 /* AppDelegate.swift */; };
@@ -34,6 +35,7 @@
 		70F302D1213FA353002DC0F2 /* RootTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabViewController.swift; sourceTree = "<group>"; };
 		70F302D3213FA71F002DC0F2 /* OneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneViewController.swift; sourceTree = "<group>"; };
 		70F302D5213FA737002DC0F2 /* TwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoViewController.swift; sourceTree = "<group>"; };
+		800B3EFC216F58CC00408951 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		C6412019103F73A204058248 /* Pods-kato.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kato.debug.xcconfig"; path = "Pods/Target Support Files/Pods-kato/Pods-kato.debug.xcconfig"; sourceTree = "<group>"; };
 		E75DEC1F213ED23700FDA946 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		E75DEC21213EED6400FDA946 /* Credential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credential.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				70F302BA213CEA77002DC0F2 /* GameViewController.swift */,
 				70F302BC213CEA94002DC0F2 /* TalkViewController.swift */,
 				E75DEC1F213ED23700FDA946 /* WebViewController.swift */,
+				800B3EFC216F58CC00408951 /* VideoViewController.swift */,
 				E75DEC21213EED6400FDA946 /* Credential.swift */,
 				E7FD174C21242A6300446460 /* Main.storyboard */,
 				E7FD174F21242A6500446460 /* Assets.xcassets */,
@@ -251,6 +254,7 @@
 				E75DEC22213EED6400FDA946 /* Credential.swift in Sources */,
 				70F302CD213D5E59002DC0F2 /* VideoCell.swift in Sources */,
 				70F302D6213FA737002DC0F2 /* TwoViewController.swift in Sources */,
+				800B3EFD216F58CC00408951 /* VideoViewController.swift in Sources */,
 				E7FD174B21242A6300446460 /* ViewController.swift in Sources */,
 				E7FD174921242A6300446460 /* AppDelegate.swift in Sources */,
 				E75DEC20213ED23700FDA946 /* WebViewController.swift in Sources */,
