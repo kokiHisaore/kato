@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MaterialComponents
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        UINavigationBar.appearance().barTintColor = MDCPalette.red.tint500
+        UINavigationBar.appearance().tintColor = UIColor.white.withAlphaComponent(0.8)
+        UINavigationBar.appearance().titleTextAttributes = [
+            .foregroundColor: UIColor.white.withAlphaComponent(0.8)
+        ]
+        UINavigationBar.appearance().shadowImage = UIImage()
         
         /*
         window = UIWindow(frame: UIScreen.main.bounds)
