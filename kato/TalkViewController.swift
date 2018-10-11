@@ -9,9 +9,10 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import XLPagerTabStrip
 
 /* 雑談ページ */
-class TalkViewController: UIViewController {
+class TalkViewController: UIViewController, IndicatorInfoProvider {
     
     // PROPERTY
     
@@ -20,6 +21,9 @@ class TalkViewController: UIViewController {
     
     /* 動画リスト */
     var videoList = JSON()
+    
+    /* タブに設定する名前 */
+    let tabName: IndicatorInfo = "雑談"
     
     
     
@@ -102,6 +106,11 @@ class TalkViewController: UIViewController {
                     }
             }
         }
+    }
+    
+    /* タブに設定する名前を返す */
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return tabName
     }
     
     
@@ -189,6 +198,11 @@ extension TalkViewController: UITableViewDelegate, UITableViewDataSource {
         
         /* セルの選択を解除 */
         tableView.deselectRow(at: indexPath, animated: false)
+        
+        /* 動画ページに遷移する */
+        let vc = VideoViewController()
+        vc.videoInfo = videoList[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

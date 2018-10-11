@@ -8,13 +8,17 @@
 
 import UIKit
 import WebKit
+import XLPagerTabStrip
 
 /* 掲示板ページ */
-class WebViewController: UIViewController {
+class WebViewController: UIViewController, IndicatorInfoProvider {
     
     // PROPERTY
     
     lazy var webView = setupWebView()
+    
+    /* タブに設定する名前 */
+    let tabName: IndicatorInfo = "掲示板"
     
     
     
@@ -36,6 +40,15 @@ class WebViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         layoutWebView()
+    }
+    
+    
+    
+    // PREPARE
+    
+    /* タブに設定する名前を返す */
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return tabName
     }
     
     

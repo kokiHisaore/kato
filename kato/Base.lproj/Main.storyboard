@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--One View Controller-->
+        <!--Game View Controller-->
         <scene sceneID="Q4P-r3-IJG">
             <objects>
-                <viewController storyboardIdentifier="One" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gqk-xt-CdF" customClass="OneViewController" customModule="kato" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Game" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gqk-xt-CdF" customClass="GameViewController" customModule="kato" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vjS-A5-fVl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="468" y="793.8530734632684"/>
         </scene>
-        <!--Two View Controller-->
+        <!--Talk View Controller-->
         <scene sceneID="Stl-dL-1iC">
             <objects>
-                <viewController storyboardIdentifier="Two" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JZn-Qz-g5l" customClass="TwoViewController" customModule="kato" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Talk" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JZn-Qz-g5l" customClass="TalkViewController" customModule="kato" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Xo-bU-SSt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,10 +41,25 @@
             </objects>
             <point key="canvasLocation" x="1314.4000000000001" y="794.75262368815595"/>
         </scene>
+        <!--Web View Controller-->
+        <scene sceneID="Iqn-SE-E9y">
+            <objects>
+                <viewController storyboardIdentifier="Web" useStoryboardIdentifierAsRestorationIdentifier="YES" id="77x-Wa-ME7" customClass="WebViewController" customModule="kato" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Cby-dt-lfj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="xur-9a-RES"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EaN-EH-gqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2046" y="797"/>
+        </scene>
         <!--KATO-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="main" id="BYZ-38-t0r" customClass="RootTabViewController" customModule="kato" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="main" id="BYZ-38-t0r" customClass="ViewController" customModule="kato" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
